@@ -21,3 +21,41 @@
     </router-link>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+export default {
+  name: 'Navbar',
+  data() {
+    return {
+      searchTerm: '',
+    };
+  },
+  computed: {
+    ...mapGetters(['allProductLength']),
+  },
+  methods: {
+    onSearch(searchTerm) {
+      if (!searchTerm) return;
+
+      this.searchTerm = '';
+      this.$router.push({ name: 'Search', params: { searchTerm } });
+    },
+  },
+};
+</script>
+
+<style>
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-container .logo {
+  font-size: 24px;
+  font-weight: bolder;
+  font-style: oblique;
+  text-transform: uppercase;
+  font-variant: all-petite-caps;
+}
+</style>
