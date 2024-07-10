@@ -22,6 +22,27 @@
     </a-button>
   </div>
 </template>
+<script>
+import { mapState, mapMutations } from "vuex";
+export default {
+  data() {
+    return {
+      value: 0,
+    };
+  },
+  props: {
+    product: Object,
+  },
+  computed: {
+    ...mapState(["cart"]),
+  },
+  watch: {
+    value() {
+      this.product.value === this.value;
+    },
+  },
+};
+</script>
 
 
 <style scoped>
