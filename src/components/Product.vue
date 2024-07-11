@@ -113,6 +113,82 @@
     </div>
   </div>
 </template>
+<script>
+import { apiMixin } from "../mixins";
+import axios from "axios";
+import { mapState, mapMutations } from "vuex";
+
+export default {
+  created: async function () {
+    // console.log('sssssssssssssssssssssss');
+    if (this.$route.name === "Home") {
+      await this.getAllProducts();
+
+      // return;
+    }
+
+    if (this.searchTerm) {
+      const { data } = await axios(
+        `https://dummyjson.com/products/search?q=${this.searchTerm}`
+      );
+      this.setItems(data.products);
+    }
+  },
+  data() {
+    return {
+      // items: null,
+      categories: [
+        "all",
+        "smartphones",
+        "laptops",
+        "skincare",
+        "groceries",
+        "furniture",
+        "tops",
+        "automotive",
+        "motorcycle",
+      ],
+    };
+  },
+  computed: {
+    ...mapState(["items"]),
+  },
+  methods: {
+    ...mapMutations([
+      "setItems",
+      "sortAscendingAction",
+      "sortDescendingAction",
+    ]),
+    // setItemInStore(data) {},
+    async getAllProducts() {
+      const { data } = await axios(`https://dummyjson.com/products`);
+      // this.items = data;
+      this.setItems(data.products);
+    },
+    async getProductByCategory(cat) {
+      if (cat === "all") {
+        await this.getAllProducts();
+        return;
+      }
+      let d = await fetch(`https://dummyjson.com/products/category/${cat}`);
+      let da = await d.json();
+      // this.items = da;
+      this.setItems(da.products);
+
+      // this.$router.push('/');
+    },
+
+    openThisProduct(item) {
+      this.$router.push({ name: "productDetails", params: { id: item.id } });
+    },
+  },
+  mixins: [apiMixin],
+  props: {
+    searchTerm: String,
+  },
+};
+</script>
+
 
 
 <style scoped>
