@@ -82,6 +82,71 @@
   </div>
 </template>
 
+<script>
+const columns = [
+  {
+    title: 'Title',
+    dataIndex: 'title',
+    key: 'title',
+    scopedSlots: { customRender: 'title' },
+    width: 80,
+  },
+  {
+    title: 'Count',
+    dataIndex: 'value',
+    key: 'value',
+    width: 80,
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+    width: 80,
+    ellipsis: true,
+  },
+  {
+    title: 'Total/Product',
+    dataIndex: 'total',
+    key: 'total',
+    width: 120,
+    ellipsis: true,
+  },
+];
+
+import { mapState, mapMutations, mapGetters } from 'vuex';
+export default {
+  data() {
+    return {
+      // data,
+      columns,
+    };
+  },
+  computed: {
+    ...mapState(['cart']),
+    ...mapGetters(['getTotalBill', 'getBillBreakDown']),
+  },
+  methods: {
+    gotoCheckoutPage() {
+      this.$router.push(`checkout`);
+    },
+    titleCount(item) {
+      return `${item.title} count ${item.value}`;
+    },
+    ...mapMutations(['increaseCount', 'decreaseCount', 'removeProduct']),
+    increaseNumber(id) {
+      this.increaseCount(id);
+      console.log('cart: ', this.cart);
+    },
+    decreaseNumber(id) {
+      this.decreaseCount(id);
+    },
+    deleteProduct(id) {
+      this.removeProduct(id);
+    },
+  },
+};
+</script>
+
 
 
 <style>
