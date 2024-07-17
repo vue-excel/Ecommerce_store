@@ -73,4 +73,29 @@ export default new Vuex.Store({
       state.cart = [];
     },
   },
+    getters: {
+    allProductLength: (state) => state.cart.filter((v) => v.value != 0).length,
+    getTotalBill: (state) => {
+      return state.cart
+        .reduce((acc, v) => {
+          if (v.value != 0) {
+            let sum = v.price * v.value;
+            return acc + sum;
+          }
+          return acc;
+        }, 0)
+        .toFixed(2);
+    },
+    getBillBreakDown: (state) => {
+      return state.cart.reduce((acc, v) => {
+        if (v.value != 0) {
+          let sum = v.price * v.value;
+          return [...acc, { ...v, total: sum, key: v.id }];
+        }
+        return acc;
+      }, []);
+    },
+  },
+  actions: {},
+  modules: {},
 });
