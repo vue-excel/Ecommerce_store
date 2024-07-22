@@ -4,11 +4,10 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
+  state: {
     cart: [],
     items: [],
   },
-
   mutations: {
     setItems(state, payload) {
       state.items = payload;
@@ -73,7 +72,7 @@ export default new Vuex.Store({
       state.cart = [];
     },
   },
-    getters: {
+  getters: {
     allProductLength: (state) => state.cart.filter((v) => v.value != 0).length,
     getTotalBill: (state) => {
       return state.cart
