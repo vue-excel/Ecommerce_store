@@ -30,17 +30,7 @@ export default {
       value: 0,
     };
   },
-  props: {
-    product: Object,
-  },
-  computed: {
-    ...mapState(["cart"]),
-  },
-  watch: {
-    value() {
-      this.product.value === this.value;
-    },
-  },
+
 };
 </script>
 
