@@ -24,8 +24,8 @@ This project is an e-commerce platform built using Vue.js and Nuxt.js. The proje
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/e-commerce-project.git
-   cd e-commerce-project
+   git clone https://github.com/vue-excel/Ecommerce_store.git
+   cd Ecommerce_store
 
 ## Important command 
 
