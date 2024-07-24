@@ -1,47 +1,43 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <a-layout>
+      <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
+        <Navbar />
+      </a-layout-header>
+      <a-layout-content>
+        <router-view :key="$route.fullPath" />
+      </a-layout-content>
+      <!-- <a-layout-footer>Footer</a-layout-footer> -->
+    </a-layout>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script>
+import Navbar from "@/components/Navbar.vue";
+
+export default {
+  components: {
+    Navbar,
+  },
+};
+</script>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.ant-layout {
+  background: white !important;
+}
+.ant-layout-content {
+  margin-top: 64px;
 }
 </style>
